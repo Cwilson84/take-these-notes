@@ -1,16 +1,23 @@
-const express = require('express');
-const db = require('.develop/db');
-const path = require('path');
+const express = require("express");
+const db = require(".develop/db");
+const path = require("path");
 
 const server = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
-server.use(express.static('public'));
+const apiRoutes = require("./routes/apiRoutes");
+const htmlRoutes = require("./routes/htmlRoutes");
 
-server.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, 'develop/index.html'))
+server.use(express.json());
+server.use(express.static("public"));
+server.use(
+  express.urlencoded({
+    extended: true,
+  })
 );
 
-server.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, 'develop/notes.html'))
-);
+server.use("/api", apiRoutes);
+server.use("/", htmlRoutes);
+server.listen(PORT, () => {
+  console.log(`API server now on port ${PORT}!`);
+});
