@@ -1,5 +1,5 @@
 const express = require("express");
-const db = require(".develop/db");
+const db = require("./Develop/db");
 const path = require("path");
 
 const server = express();
@@ -19,5 +19,5 @@ server.use(
 server.use("/api", apiRoutes);
 server.use("/", htmlRoutes);
 server.listen(PORT, () => {
-  console.log(`API server now on port ${PORT}!`);
+  console.log(`API server listening at port ${PORT}!`);
 });
