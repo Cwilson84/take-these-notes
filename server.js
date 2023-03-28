@@ -1,5 +1,5 @@
 const express = require("express");
-const db = require('./db');
+const db = require('./db/db.json');
 const path = require("path");
 
 const server = express();
